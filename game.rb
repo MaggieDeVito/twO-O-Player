@@ -1,7 +1,3 @@
-# game
-#BEHAVIOURS
-# - go between turns
-
 require "./players"
 require "./questions"
 
@@ -18,26 +14,27 @@ class Game
       while !@player1.dead? && !@player2.dead? do
         first_question = Questions.new
         puts first_question.ask_question(@current_player.name)
+        print "> "
         players_answers = gets.chomp
         if first_question.correct_answer?(players_answers.to_i)
-          puts "YES! You are correct."
-          puts ">"
+          puts "#{@current_player.name}: YES! You are correct."
         else
-          puts "Seriously? No"
-          puts ">"
+          puts "#{@current_player.name}: Seriously? No"
           @current_player.incorrect_answer
         end
-        puts "#{@player1.name}: #{@player1.lives}/3 vs #{@player2.name}: #{@player2.lives}/3"
-        puts ">"
+        puts "P1: #{@player1.lives}/3 vs P2: #{@player2.lives}/3"
         if @current_player == @player1
           @current_player = @player2
         else 
           @current_player = @player1
         end
+        puts "~~~~~NEXT PLAYERS TURN~~~~~"
       end
+      if @player1.dead? 
+        puts "PLAYER 2 WINS WITH A SCORE OF #{@player2.lives}/3"
+      else 
+        puts "PLAYER 1 WINS WITH A SCORE OF #{@player1.lives}/3"
+      end
+      puts "~~~~~GAME OVER~~~~~"
     end
   end
-
-
-  newGame = Game.new
-  newGame.start_game
