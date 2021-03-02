@@ -17,13 +17,22 @@ class Game
     def start_game
       while !@player1.dead? && !@player2.dead? do
         first_question = Questions.new
-        puts first_question.ask_question(@current_player)
+        puts first_question.ask_question(@current_player.name)
         players_answers = gets.chomp
         if first_question.correct_answer?(players_answers.to_i)
           puts "YES! You are correct."
           puts ">"
         else
           puts "Seriously? No"
+          puts ">"
+          @current_player.incorrect_answer
+        end
+        puts "#{@player1.name}: #{@player1.lives}/3 vs #{@player2.name}: #{@player2.lives}/3"
+        puts ">"
+        if @current_player == @player1
+          @current_player = @player2
+        else 
+          @current_player = @player1
         end
       end
     end
