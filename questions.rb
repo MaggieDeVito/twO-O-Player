@@ -11,19 +11,11 @@ class Questions
   def ask_question
     "What is #{@num1} plus #{@num2}"
   end
-  def answer
-    "#{@sum}"
-  end
-  def correct_answer?
-    player_answers = gets.chomp.to_i
-    if player_answers == @sum
-      "Correct!"
-    else
-      "Incorrect!"
-    end
+  def correct_answer?(player_input)
+    @sum == player_input
   end
 end
 
-question1 = Questions.new
-puts question1.ask_question
-puts question1.play_answer
+# question1 = Questions.new
+# puts question1.ask_question
+# puts question1.correct_answer?
