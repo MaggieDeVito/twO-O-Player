@@ -17,7 +17,7 @@ class Game
     def start_game
       while !@player1.dead? && !@player2.dead? do
         first_question = Questions.new
-        puts first_question.ask_question
+        puts first_question.ask_question(@current_player)
         players_answers = gets.chomp
         if first_question.correct_answer?(players_answers.to_i)
           puts "YES! You are correct."
